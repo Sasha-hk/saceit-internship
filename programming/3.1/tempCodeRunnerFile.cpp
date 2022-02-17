@@ -1,14 +1,6 @@
-#include "bprinter/table_printer.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
+ing namespace bprinter;
 
-#if defined(USE_BOOST_KARMA)
-#include <boost/spirit/include/karma.hpp>
-namespace karma = boost::spirit::karma;
-#endif
-
-using bprinter::TablePrinter;
-int main(int argc, char** argv){
+int main() {
   TablePrinter tp(&std::cout);
   tp.AddColumn("Name", 25);
   tp.AddColumn("Age", 5);
@@ -28,6 +20,4 @@ int main(int argc, char** argv){
   tp << "Jane Doe" << bprinter::endl();
   tp << "Tom Doe" << 7 << "Student" << -M_PI;
   tp.PrintFooter();
-
-  return 1;
 }
