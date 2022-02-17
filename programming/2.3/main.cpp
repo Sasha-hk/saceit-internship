@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <string> 
 
 
@@ -14,15 +15,34 @@ string naturalNumberView[] = {
   "six",
   "seven",
   "eigth",
-  "nine"
+  "nine",
+  "ten"
 };
 
-string bigNumberView[] = {
+string dozensNumberView[] = {
+  "",
+  "Ten",
   "Twenty",
   "Thirty",
   "Fourty",
   "Fifty",
-  "Sixty"
+  "Sixty",
+  "Seventy",
+  "Eighty",
+  "Ninety"
+};
+
+string toTwenty[] = {
+  "",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fuorteen",
+  "fifteen",
+  "sixteen",
+  "seventenn",
+  "eightenn",
+  "ninetenn"
 };
 
 int randint(int min, int max) {
@@ -30,35 +50,40 @@ int randint(int min, int max) {
   return rand() % (max + 1 - min) + min;
 }
 
-int divizion(int one, int divider) {
-  return one / divider;
-}
-
-string prepareNaturalNumbers(int number) {
+string parseNaturalNumbers(int number) {
+  // parse natural numbers 
   if (number % 10) {
-    return naturalNumberView[number % 10];
+    return naturalNumberView[number % 10] + ' ';
   }
   return "";
 }
 
-void withIf(int year) {
-  int pointr = divizion(year, 10);
+string parseNumberYear(int number) {
+  string outString;
+  int toHundred = floor(number / 10);
 
-
-}
-
-void withSwitch(int year) {
-
+  // parse dozens number
+  if (number >= 20) {
+    outString += dozensNumberView[toHundred] + ' ';
+    outString += parseNaturalNumbers(number);
+  }
+  else if (number <= 20 && number >= 11) {
+    outString += toTwenty[number % 10] + ' ';
+  }
+  else if (number <= 10) {
+    outString += naturalNumberView[number] + ' ';
+  }
+  
+  return outString;
 }
 
 int main() {
   int yearNumber = randint(20, 69);
+  // int yearNumber = 70;
 
   cout << "Year number: " << yearNumber << endl;
 
-  withIf(yearNumber);
-
-  withSwitch(yearNumber);
+  cout << parseNumberYear(yearNumber) << endl;
  
   return 0;
 }
