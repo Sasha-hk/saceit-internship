@@ -17,13 +17,16 @@ income = 0
 tag = ''
 
 def calculateIncome(k, i) -> float:
-  return k * randint(0, 100) - i * randint(0, 50)
+  return k * randint(-i * randint(0, 50), 100)
 
 minIncome = 0
 maxIncome = 0
+k = 0
+tag = ''
 
 for i in range(1991, 2022 + 1):
-  income = calculateIncome(16, i)
+  k = i % 10
+  income = calculateIncome(k, i)
 
   if not minIncome:
     minIncome = income
@@ -41,6 +44,12 @@ for i in range(1991, 2022 + 1):
     if income > maxIncome:
       maxIncome = i
 
+  # define tag
+  if income > 0:
+    tag = 'income'
+  else:
+    tag = 'loss'
+
 
   table_data.append({
     "year": i,
@@ -53,9 +62,6 @@ for i in table_data:
 
   elif maxIncome == i['year']:
     tag = 'max income'
-
-  else:
-    tag = ''
 
   table.add_row([i['year'], i['income'], tag])
 
