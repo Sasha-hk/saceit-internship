@@ -46,7 +46,6 @@ string toTwenty[] = {
 };
 
 int randint(int min, int max) {
-  srand(time(NULL));
   return rand() % (max + 1 - min) + min;
 }
 
@@ -78,8 +77,9 @@ string parseNumberYear(int number) {
 }
 
 int main() {
+  srand(time(NULL));
+  
   int yearNumber = randint(20, 69);
-  // int yearNumber = 70;
 
   cout << "Year number: " << yearNumber << endl;
 

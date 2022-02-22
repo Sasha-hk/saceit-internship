@@ -21,15 +21,21 @@ int main() {
     }
   }
 
-  int topTriangle = n / 2;
+  int topTriangle = n;
   for (int i = 0; i < n / 2 + 1; i++) {
+
     for (int j = 0; j < n; j++) {
-      if (true) {
-        
+      cout << topTriangle  << " ";
+      if (j >= n - topTriangle && j <= n / 2 + topTriangle / 2) {
+        arr[i][j] = 1;
       }
     }
-    topTriangle -= 1;
+    cout << endl;
+    topTriangle -= 2;
+
   }
+
+  cout << endl;
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
