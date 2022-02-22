@@ -1,41 +1,82 @@
 #include <iostream>
 #include <cmath>
 #include <ctime>
-#define n 11
+#define n 9
 
 
 using namespace std;
 
 int randint(int min, int max) {
-  srand(time(NULL));
   return rand() % (max + 1 - min) + min;
 }
 
 int main() {
-
+  srand(time(NULL));
   int arr[n][10];
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      arr[i][j] = 0;
+      arr[i][j] = randint(0, 100);
     }
   }
 
-  int topTriangle = n;
-  for (int i = 0; i < n / 2 + 1; i++) {
+  int maxValue = arr[0][0];
+  int minValue = arr[0][0];
 
-    for (int j = 0; j < n; j++) {
-      cout << topTriangle  << " ";
-      if (j >= n - topTriangle && j <= n / 2 + topTriangle / 2) {
-        arr[i][j] = 1;
+  int tt = 0;
+  for (int i = 0; i < n / 2 + 1; i++) {
+    for (int j = tt; j < n - tt; j++) {
+      if (arr[i][j] > maxValue) {
+        maxValue = arr[i][j];
       }
     }
-    cout << endl;
-    topTriangle -= 2;
-
+    tt += 1;
   }
 
-  cout << endl;
+  int bt = n / 2 - 1;
+  for (int i = n / 2 + 1; i < n; i++) {
+    for (int j = bt; j < n - bt; j++) {
+      if (arr[i][j] > maxValue) {
+        maxValue = arr[i][j];
+      }
+    }
+    bt -= 1;
+  }
+
+  int rt = n;
+  for (int i = 0; i < n / 2 + 1; i++) {
+    for (int j = rt; j < n; j++) {
+      if (arr[i][j] > maxValue) {
+        maxValue = arr[i][j];
+      }
+    }
+    rt -= 1;
+  }
+
+  int lt = 1;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < lt; j++) {
+      if (arr[i][j] < minValue) {
+        minValue = arr[i][j];
+      }
+    }
+    if (i >= n / 2) {
+      lt -= 1;
+    }
+    else {
+      lt += 1;
+    }
+  }
+
+  int rp = n / 2;
+  for (int i = 0; i < n / 2 + 1; i++) {
+    for (int j = rp; j < n; j++) {
+      if (arr[i][j] > maxValue) {
+        maxValue = arr[i][j];
+      }
+    }
+    rp += 1;
+  }
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -44,10 +85,9 @@ int main() {
     cout << endl;
   }
 
-
-
-  
-
+  cout << endl;
+  cout << " > Min value: " << minValue << endl;
+  cout << " > Max value: " << maxValue << endl;
 
   return 0;
 }

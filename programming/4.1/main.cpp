@@ -44,7 +44,6 @@ int main() {
 
     if (income > 0) {
       if (income > maxIncomeValue) {
-        cout << i << endl;
         maxIncomeYear = i;
         maxIncomeValue = income;
       }

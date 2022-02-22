@@ -6,11 +6,11 @@
 using namespace std;
 
 int randint(int min, int max) {
-  srand(time(NULL));
   return rand() % (max + 1 - min) + min;
 }
 
 int  main() {
+  srand(time(NULL));
 
   return 0;
 }
