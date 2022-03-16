@@ -23,9 +23,7 @@ void generatePayment(int count, int *workers) {
   }
 }
 
-int main() {
-  srand(time(NULL));
-
+void makeSomethingElse() {
   int *yWorkTime = new int[Y];
   int *gWorkTime = new int[G];
 
@@ -82,6 +80,13 @@ int main() {
   else {
     cout << "G had more averaga payment than Y" << endl;
   }
+
+}
+
+int main() {
+  srand(time(NULL));
+
+  makeSomethingElse();
 
   return 0;
 }

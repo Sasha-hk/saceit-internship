@@ -1,4 +1,4 @@
-#include "../VariadicTable.h"
+#include "../include/VariadicTable.h"
 #include <string>
 #include <iostream>
 

@@ -23,16 +23,7 @@ void fillData(float **data) {
   }
 }
 
-int main() {
-  srand(time(NULL));
-  float **data = new float*[n];
-
-  for (int i = 0; i < n; i++) {
-    data[i] = new float[k];
-  }
-
-  fillData(data);
-
+void makeSomething(float **data) {
   cout << "Array: " << endl;
   for (int i = 0; i < n; i++) {
     cout << "| ";
@@ -42,7 +33,6 @@ int main() {
     cout << endl;
   }
 
-  // task 16
   int 
     minIndexN = 0,
     minIndexK = 0,
@@ -71,7 +61,27 @@ int main() {
   cout << endl;
   cout << "Min index\n  n: " << minIndexN << "\n  k: " << minIndexK << endl;
   cout << "Max index\n  n: " << maxIndexN << "\n  k: " << maxIndexK << endl;
+}
+
+float** initArray() {
+  float **data = new float*[n];
+
+  for (int i = 0; i < n; i++) {
+    data[i] = new float[k];
+  }
+
+  return data;
+}
+
+int main() {
+  srand(time(NULL));
   
+  float **data = initArray();
+
+  fillData(data);
+
+  makeSomething(data);
+
 
   return 0;
 }

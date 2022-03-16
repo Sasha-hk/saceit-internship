@@ -9,10 +9,7 @@ int randint(int min, int max) {
   return rand() % (max + 1 - min) + min;
 }
 
-int  main() {
-  srand(time(NULL));
-  int duration[25];
-
+void makeSomething(int *duration) {
   for (int i = 0; i < 25; i++) {
     duration[i] = randint(0, 10);
     cout << duration[i] << " ";
@@ -28,7 +25,13 @@ int  main() {
   }
 
   cout << "Min avarage time: " << minAverage << endl;
+}
 
+int  main() {
+  srand(time(NULL));
+  int duration[25];
+
+  makeSomething(duration);
 
   return 0;
 }

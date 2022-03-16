@@ -163,7 +163,7 @@ void handleOption(string option, Json::Value data) {
   }
 }
 
-int main() {
+void makeSomething() {
   string option = "";
 
   Json::Value parsed = readAndParseDB(filename);
@@ -181,6 +181,12 @@ int main() {
     // handle options
     handleOption(option, parsed);
   }
+}
+
+int main() {
+  makeSomething();
 
   return 0;
 }
+
+// tu run add -ljsoncpp to compiler

@@ -10,11 +10,7 @@ int randint(int min, int max) {
   return rand() % (max + 1 - min) + min;
 }
 
-int  main() {
-  srand(time(NULL));
-
-  string fullName;
-
+void makeSomething(string fullName) {
   cout << "Enter full name: ";
 
   getline(cin, fullName);
@@ -44,6 +40,14 @@ int  main() {
   }
 
   cout << "Name length: " << fatherNameIndex - lastNameIndex << endl;
+}
+
+int  main() {
+  srand(time(NULL));
+
+  string fullName;
+
+  makeSomething(fullName);
 
   return 0;
 }

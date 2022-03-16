@@ -97,9 +97,7 @@ void getWIthType(int count, weapon *data) {
   }
 }
 
-int  main() {
-  srand(time(NULL));
-  int count;
+void makeSomething(int count) {
   cout << "Enter count of weaponse: ";
   cin >> count;
 
@@ -117,8 +115,14 @@ int  main() {
   cout << "\n\nData after sort: \n\n";
   showData(count, weapons);
 
-  
   getWIthType(count, weapons);
+}
+
+int  main() {
+  srand(time(NULL));
+  int count;
+
+  makeSomething(count);
 
   return 0;
 }

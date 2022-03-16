@@ -10,9 +10,10 @@ int randint(int min, int max) {
   return rand() % (max + 1 - min) + min;
 }
 
-int main() {
-  srand(time(NULL));
-  int arr[n][10];
+void makeSomething(int **arr) {
+  for (int i = 0; i < 10; i++) {
+    arr[i] = new int[10];
+  }
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -88,6 +89,14 @@ int main() {
   cout << endl;
   cout << " > Min value: " << minValue << endl;
   cout << " > Max value: " << maxValue << endl;
+
+}
+
+int main() {
+  srand(time(NULL));
+  int **arr = new int*[n];
+
+  makeSomething(arr);
 
   return 0;
 }

@@ -27,8 +27,7 @@ void showData(int **data) {
   }
 }
 
-int  main() {
-  srand(time(NULL));
+void makeSomething() {
   int **numbers1 = new int*[M];
   int **numbers2 = new int*[M];
   int **numbers3 = new int*[M];
@@ -130,6 +129,12 @@ int  main() {
   }
 
   cout << endl;
+}
+
+int  main() {
+  srand(time(NULL));
+
+  makeSomething();
 
   return 0;
 }
