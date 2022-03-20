@@ -2,8 +2,8 @@ from math import sqrt, sin
 from random import randint
 
 
-def Yi(x: int) -> float:
-  return sin(x)
+def Yi(x, h):
+  return x + h
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
   i = 0
 
   while i < max:
-    r = Yi(i)
+    i = Yi(i, h)
 
     if r > 0:
       sum *= r

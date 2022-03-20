@@ -1,13 +1,8 @@
 program HelloWorld;
 uses 
-  crt,
-  process;
-
+  Classes, Unix;
 var 
-  Pro1 : TProcess;
-
+  S: LongInt;
 begin
-  Pro1:=TProcess.Create(nil);
-  Pro1.CommandLine:=(('./main'));
-  Pro1.Execute;
+  S := fpsystem('./main');
 end.
