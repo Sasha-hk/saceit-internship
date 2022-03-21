@@ -1,6 +1,6 @@
 # Practice
 
-Internship at [SACEIT](https://saceit.org.ua/) collage.
+Internship at [SACEIT](https://saceit.org.ua/) college.
 
 Table of contents:
 
