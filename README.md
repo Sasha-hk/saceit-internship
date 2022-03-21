@@ -1,5 +1,7 @@
 # Practice
 
+Internship at [SACEIT](https://saceit.org.ua/) collage.
+
 Table of contents:
 
 - Programming
