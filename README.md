@@ -1,6 +1,6 @@
 # Practice
 
-Internship at [SACEIT](https://saceit.org.ua/) college.
+Internship at [SACEIT](https://saceit.org.ua/) college in 2022.
 
 Table of contents:
 
