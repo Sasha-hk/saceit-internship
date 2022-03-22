@@ -113,13 +113,6 @@ ostream& operator<<(ostream& out, Date& date) {
   return out;
 }
 
-// bool operator>(Date *second) {
-//   cout << first << endl;
-//   cout << second << endl;
-
-//   return true;
-// }
-
 bool operator==(Date& first, Date& second) {
   if (first.getUnixTime() == second.getUnixTime()) {
     return true;
