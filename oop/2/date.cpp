@@ -1,141 +1,193 @@
 #include "date.h"
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <chrono>
 #include <ctime>
-#include <stdio.h>
-#include <time.h>
+#include <vector>
 
 using namespace std;
 
-// time(nullptr)
+// staff functions
+void tokenize(std::string const &str,
+  const char delim,
+  std::vector<std::string> &out)
+{
+  size_t start;
+  size_t end = 0;
 
-int dd(int x, int y) {
-  return floor(x / y);
+  while ((start = str.find_first_not_of(delim, end)) != std::string::npos)
+  {
+    end = str.find(delim, start);
+    out.push_back(str.substr(start, end - start));
+  }
 }
 
-int roundUp(int numToRound, int multiple) {
-  if (multiple == 0) {
-    return numToRound;
+string checkZero(int num) {
+  if (num < 10) {
+    return '0' + to_string(num);
   }
+  return to_string(num);
+}
 
-  int remainder = numToRound % multiple;
-  if (remainder == 0) {
-    return numToRound;
-  }
+// implementation of the methods
+Date::Date() {
+  time_t current_time = time(NULL);
+  TIME = localtime(&current_time);
 
-  return numToRound + multiple - remainder;
+  time_t x = mktime(TIME);
+  cout << x << " <<< " << endl;
+}
+
+Date::Date(string datetime) {
+  string datePart = datetime.substr(0, datetime.find(' '));
+  string timePart = datetime.substr(datetime.find(' ') + 1, -1);
+  int parseDateIndex = 0;
+  int year = 1970;
+  int month = 0;
+  int date = 1;
+
+  int parseTimeIndex = 0;
+  int hours = 0;
+  int minutes = 0;
+  int seconds = 0;
+
+  // parse date part
+  std::vector<std::string> dateOptions;
+  tokenize(datePart, '.', dateOptions);
+
+  year = stoi(dateOptions[0]);
+  month = stoi(dateOptions[1]);
+  date = stoi(dateOptions[2]);
+
+  // parse time part
+  std::vector<std::string> timeOptions;
+  tokenize(timePart, ':', timeOptions);
+
+  hours = stoi(timeOptions[0]);
+  minutes = stoi(timeOptions[1]);
+  seconds = stoi(timeOptions[2]);
+
+  // initialize time
+  time_t current_time = time(NULL);
+  TIME = localtime(&current_time);
+
+  TIME->tm_year = year;
+  TIME->tm_mon = month;
+  TIME->tm_mday = date;
+  TIME->tm_hour = hours;
+  TIME->tm_min = minutes;
+  TIME->tm_sec = seconds;
+}
+
+Date::Date(Date *datePtr) {
+  unixTime = datePtr->getUnixTime();
+  TIME = datePtr->getTime();
+}
+
+Date::Date(
+  unsigned int year,
+  unsigned int month,
+  unsigned int date,
+  unsigned int hours,
+  unsigned int minutes,
+  unsigned int seconds
+) {
+  time_t current_time = time(NULL);
+  TIME = localtime(&current_time);
+
+  TIME->tm_year = year;
+  TIME->tm_mon = month;
+  TIME->tm_mday = date;
+  TIME->tm_hour = hours;
+  TIME->tm_min = minutes;
+  TIME->tm_sec = seconds;
+}
+
+// ostream Date::&operator<<(ostream &out, Date &date) {
+//   out << date->getString();
+//   return out;
+// }
+// ostream& Date::operator<<(ostream& out, int x) {
+ostream& operator<<(ostream& out, Date date) {
+  out << date.getString();
+  return out;
+}
+
+Date::~Date() {
+  cout << TIME << endl;
+  delete[] TIME;
+}
+
+void Date::enter() {
+  int year, month, date, hours, minutes, seconds;
+
+  cout << "Enter year:";
+  cin >> year;
+  cout << "Enter month:";
+  cin >> month;
+  cout << "Enter date:";
+  cin >> date;
+  cout << "Enter hours:";
+  cin >> hours;
+  cout << "Enter minutes:";
+  cin >> minutes;
+  cout << "Enter seconds:";
+  cin >> seconds;
+
+  TIME->tm_year = year;
+  TIME->tm_mon = month;
+  TIME->tm_mday = date;
+  TIME->tm_hour = hours;
+  TIME->tm_min = minutes;
+  TIME->tm_sec = seconds;
+}
+
+void Date::display() {
+  cout
+    << checkZero(getYear()) << "."
+    << checkZero(getMonth()) << "."
+    << checkZero(getDate()) << " "
+    << checkZero(getHours()) << ":"
+    << checkZero(getMinutes()) << ":"
+    << checkZero(getSeconds()) << endl;
+}
+
+string Date::getString() {
+  return checkZero(getYear()) + '.'
+    + checkZero(getMonth()) + '.'
+    + checkZero(getDate()) + ' '
+    + checkZero(getHours()) + ':'
+    + checkZero(getMinutes()) + ':'
+    + checkZero(getSeconds());
 }
 
 int Date::getSeconds() {
-  return unixTime % 60;
+  return TIME->tm_sec;
 }
 
 int Date::getMinutes() {
-  return floor(unixTime / 60 % 60);
+  return TIME->tm_min;
 }
 
 int Date::getHours() {
-  return int(floor(unixTime / 60 / 60)) % 24;
+  return TIME->tm_hour;
 }
 
 int Date::getDate() {
-  return 0;
+  return TIME->tm_mday;
 }
 
 int Date::getMonth() {
-  return 0;
+  return TIME->tm_mon;
 }
 
 int Date::getYear() {
-  return 1970 + unixTime / 60 / 60 / 24 / 365;
+  return TIME->tm_year + 1900;
 }
 
-Date::Date() {
-  time_t current_time = time(NULL);
-  // tm* localtime(const time_t* current_time);
-
-  // time_t curr_time;
-
-	// time(&curr_time);
-	// cout << "Current date and time: " << asctime(localtime(&curr_time)) << endl;
-
-
-  time_t curr_time;
-	curr_time = time(NULL);
-
-	tm *tm_gmt = gmtime(&curr_time);
-	cout << "Current time : " << tm_gmt->tm_hour << ":" << tm_gmt->tm_min << ":" << tm_gmt->tm_sec << " GMT";
-
-
-  time_t tim;
-	tm *ptr;
-  int y = 2017, m = 4, d = 20;
-	char weekday[7][20] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
-  time(&tim);
-	ptr = localtime(&tim);
-
-  ptr->tm_year = y - 1900;
-	ptr->tm_mon = m - 1;
-	ptr->tm_mday = d;
-
-  mktime (ptr);
-
-  cout << "April 20, 2017 was " << weekday[ptr->tm_wday] << endl;
-
-
-
-
-  cout << unixTime << endl;
-  // need to as count timezone offset
-  static uint8_t daysInMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-  days = unixTime / 86400;
-  unixTime = time(nullptr);
-
-  cout << 1 << " <<< timzone " << endl;
-
-  year = getYear();
-
-  leapYears = floor(roundUp(year - 1970, 4) / 4);
-
-  month = getMonth();
-
-  date = getDate();
-
-  hours = getHours();
-
-  minutes = getMinutes();
-
-  seconds = getSeconds();
-
-  cout <<  year << "-" << month << "-" << date << " " << hours << ":" << minutes << ":" << seconds << endl;
+long Date::getUnixTime() {
+  return unixTime;
 }
 
-// Date::Date(string date) {
-
-// }
-
-// Date::Date(Date *date) {
-
-// }
-
-// Date::Date(
-//   unsigned int year,
-//   unsigned int month,
-//   unsigned int date,
-//   unsigned int hours,
-//   unsigned int minutes,
-//   unsigned int seconds
-// ) {
-
-// }
-
-// void Date::enter() {
-
-// }
-
-// void Date::display() {
-
-// }
+tm* Date::getTime() {
+  return TIME;
+}
