@@ -30,14 +30,16 @@ string checkZero(int num) {
 
 // implementation of the methods
 Date::Date() {
+  cout << "2" << endl;
   time_t current_time = time(NULL);
   TIME = localtime(&current_time);
 
-  time_t x = mktime(TIME);
-  cout << x << " <<< " << endl;
+  // time_t x = mktime(TIME);
+  // cout << x << " <<< " << endl;
 }
 
 Date::Date(string datetime) {
+  cout << "1" << endl;
   string datePart = datetime.substr(0, datetime.find(' '));
   string timePart = datetime.substr(datetime.find(' ') + 1, -1);
   int parseDateIndex = 0;
@@ -54,7 +56,7 @@ Date::Date(string datetime) {
   std::vector<std::string> dateOptions;
   tokenize(datePart, '.', dateOptions);
 
-  year = stoi(dateOptions[0]);
+  year = stoi(dateOptions[0]) - 1900;
   month = stoi(dateOptions[1]);
   date = stoi(dateOptions[2]);
 
@@ -102,20 +104,30 @@ Date::Date(
   TIME->tm_sec = seconds;
 }
 
-// ostream Date::&operator<<(ostream &out, Date &date) {
-//   out << date->getString();
-//   return out;
-// }
-// ostream& Date::operator<<(ostream& out, int x) {
-ostream& operator<<(ostream& out, Date date) {
+ostream& operator<<(ostream& out, Date& date) {
   out << date.getString();
   return out;
 }
 
-Date::~Date() {
-  cout << TIME << endl;
-  delete[] TIME;
+// bool operator>(Date *second) {
+//   cout << first << endl;
+//   cout << second << endl;
+
+//   return true;
+// }
+
+bool operator==(Date& first, Date& second) {
+  if (first.getTime() == second.getTime()) {
+    cout << first.getUnixTime() << " " << second.getUnixTime() << endl;
+    return true;
+  }
+
+  return false;
 }
+
+// Date::~Date() {
+//   // no need to free any date
+// }
 
 void Date::enter() {
   int year, month, date, hours, minutes, seconds;
@@ -152,6 +164,7 @@ void Date::display() {
 }
 
 string Date::getString() {
+  cout << unixTime << endl;
   return checkZero(getYear()) + '.'
     + checkZero(getMonth()) + '.'
     + checkZero(getDate()) + ' '

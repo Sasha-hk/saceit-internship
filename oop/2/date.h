@@ -123,19 +123,18 @@ class Date {
      */
     tm* getTime();
 
-    // ostream &operator<<(ostream &out, Date &date);
-    // ostream &operator<<(ostream &output, const Date &D);
-    // friend ostream& operator<<(ostream& out, const Date& date);
 
     /**
      * Overload << operator
      */
-    friend std::ostream& operator<<(std::ostream& out, Date *date);
+    // friend std::ostream& operator<<(std::ostream& out, const Date& date);
+
+    // friend bool operator==(Date& first, Date& second);
 
     /**
      * Destructor
      */
-    ~Date();
+    // ~Date();
 };
 
 #endif /* End of DATE_H */
