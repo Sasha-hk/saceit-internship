@@ -127,9 +127,44 @@ bool operator==(Date& first, Date& second) {
   return false;
 }
 
-// Date::~Date() {
-//   // no need to free any date
-// }
+bool operator!=(Date& first, Date& second) {
+  if (first.getUnixTime() != second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator<(Date& first, Date& second) {
+  if (first.getUnixTime() < second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator>(Date& first, Date& second) {
+  if (first.getUnixTime() > second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator<=(Date& first, Date& second) {
+  if (first.getUnixTime() <= second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator>=(Date& first, Date& second) {
+  if (first.getUnixTime() >= second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+Date::~Date() {
+  // no need to free any date
+}
 
 void Date::enter() {
   int year, month, date, hours, minutes, seconds;

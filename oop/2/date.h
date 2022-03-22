@@ -123,7 +123,6 @@ class Date {
      */
     tm getTime();
 
-
     /**
      * Overload << operator
      */
@@ -135,9 +134,35 @@ class Date {
     friend bool operator==(Date& first, Date& second);
 
     /**
+     * Overload != operator
+     */
+    friend bool operator!=(Date& first, Date& second);
+
+    /**
+     * Overload < operator
+     */
+    friend bool operator<(Date& first, Date& second);
+
+    /**
+     * Overload > operator
+     */
+    friend bool operator>(Date& first, Date& second);
+
+    /**
+     * Overload <= operator
+     */
+    friend bool operator<=(Date& first, Date& second);
+
+
+    /**
+     * Overload >= operator
+     */
+    friend bool operator>=(Date& first, Date& second);
+
+    /**
      * Destructor
      */
-    // ~Date();
+    ~Date();
 };
 
 #endif /* End of DATE_H */
