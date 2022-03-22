@@ -13,7 +13,7 @@ class Date {
   private:
   protected:
     time_t unixTime;
-    tm *TIME;
+    struct tm TIME;
 
   public:
     /**
@@ -121,15 +121,18 @@ class Date {
      * Return time struct
      * @return time object
      */
-    tm* getTime();
+    tm getTime();
 
 
     /**
      * Overload << operator
      */
-    // friend std::ostream& operator<<(std::ostream& out, const Date& date);
+    friend std::ostream& operator<<(std::ostream& out, const Date& date);
 
-    // friend bool operator==(Date& first, Date& second);
+    /**
+     * Overload == operator
+     */
+    friend bool operator==(Date& first, Date& second);
 
     /**
      * Destructor

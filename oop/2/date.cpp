@@ -30,16 +30,14 @@ string checkZero(int num) {
 
 // implementation of the methods
 Date::Date() {
-  cout << "2" << endl;
-  time_t current_time = time(NULL);
-  TIME = localtime(&current_time);
+  unixTime = time(NULL);
+  TIME = *localtime(&unixTime);
 
   // time_t x = mktime(TIME);
   // cout << x << " <<< " << endl;
 }
 
 Date::Date(string datetime) {
-  cout << "1" << endl;
   string datePart = datetime.substr(0, datetime.find(' '));
   string timePart = datetime.substr(datetime.find(' ') + 1, -1);
   int parseDateIndex = 0;
@@ -69,15 +67,18 @@ Date::Date(string datetime) {
   seconds = stoi(timeOptions[2]);
 
   // initialize time
-  time_t current_time = time(NULL);
-  TIME = localtime(&current_time);
+  unixTime = time(NULL);
+  TIME = *localtime(&unixTime);
 
-  TIME->tm_year = year;
-  TIME->tm_mon = month;
-  TIME->tm_mday = date;
-  TIME->tm_hour = hours;
-  TIME->tm_min = minutes;
-  TIME->tm_sec = seconds;
+  TIME.tm_year = year;
+  TIME.tm_mon = month;
+  TIME.tm_mday = date;
+  TIME.tm_hour = hours;
+  TIME.tm_min = minutes;
+  TIME.tm_sec = seconds;
+
+  // update unixTime according to TIME
+  unixTime = mktime(&TIME);
 }
 
 Date::Date(Date *datePtr) {
@@ -94,14 +95,17 @@ Date::Date(
   unsigned int seconds
 ) {
   time_t current_time = time(NULL);
-  TIME = localtime(&current_time);
+  TIME = *localtime(&current_time);
 
-  TIME->tm_year = year;
-  TIME->tm_mon = month;
-  TIME->tm_mday = date;
-  TIME->tm_hour = hours;
-  TIME->tm_min = minutes;
-  TIME->tm_sec = seconds;
+  TIME.tm_year = year;
+  TIME.tm_mon = month;
+  TIME.tm_mday = date;
+  TIME.tm_hour = hours;
+  TIME.tm_min = minutes;
+  TIME.tm_sec = seconds;
+
+  // update unixTime according to TIME
+  unixTime = mktime(&TIME);
 }
 
 ostream& operator<<(ostream& out, Date& date) {
@@ -117,11 +121,9 @@ ostream& operator<<(ostream& out, Date& date) {
 // }
 
 bool operator==(Date& first, Date& second) {
-  if (first.getTime() == second.getTime()) {
-    cout << first.getUnixTime() << " " << second.getUnixTime() << endl;
+  if (first.getUnixTime() == second.getUnixTime()) {
     return true;
   }
-
   return false;
 }
 
@@ -145,12 +147,15 @@ void Date::enter() {
   cout << "Enter seconds:";
   cin >> seconds;
 
-  TIME->tm_year = year;
-  TIME->tm_mon = month;
-  TIME->tm_mday = date;
-  TIME->tm_hour = hours;
-  TIME->tm_min = minutes;
-  TIME->tm_sec = seconds;
+  TIME.tm_year = year;
+  TIME.tm_mon = month;
+  TIME.tm_mday = date;
+  TIME.tm_hour = hours;
+  TIME.tm_min = minutes;
+  TIME.tm_sec = seconds;
+
+  // update unixTime according to TIME
+  unixTime = mktime(&TIME);
 }
 
 void Date::display() {
@@ -164,7 +169,6 @@ void Date::display() {
 }
 
 string Date::getString() {
-  cout << unixTime << endl;
   return checkZero(getYear()) + '.'
     + checkZero(getMonth()) + '.'
     + checkZero(getDate()) + ' '
@@ -174,33 +178,33 @@ string Date::getString() {
 }
 
 int Date::getSeconds() {
-  return TIME->tm_sec;
+  return TIME.tm_sec;
 }
 
 int Date::getMinutes() {
-  return TIME->tm_min;
+  return TIME.tm_min;
 }
 
 int Date::getHours() {
-  return TIME->tm_hour;
+  return TIME.tm_hour;
 }
 
 int Date::getDate() {
-  return TIME->tm_mday;
+  return TIME.tm_mday;
 }
 
 int Date::getMonth() {
-  return TIME->tm_mon;
+  return TIME.tm_mon;
 }
 
 int Date::getYear() {
-  return TIME->tm_year + 1900;
+  return TIME.tm_year + 1900;
 }
 
 long Date::getUnixTime() {
   return unixTime;
 }
 
-tm* Date::getTime() {
+tm Date::getTime() {
   return TIME;
 }
