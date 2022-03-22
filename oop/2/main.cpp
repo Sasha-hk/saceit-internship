@@ -1,19 +1,20 @@
 #include "date.cpp"
 #include <iostream>
 #include <string>
+#include <chrono>
 
 using namespace std;
 
-Date makeDate(string date) {
-  return Date(date);
-}
+// Date makeDate(string date) {
+//   return Date(date);
+// }
 
 int  main() {
   srand(time(NULL));
 
-  Date date = makeDate("2022.01.01");
+  // Date date = makeDate("2022.01.01");
 
-  date.display();
+  // date.display();
 
   return 0;
 }
