@@ -29,7 +29,6 @@ Output:
 2000.01.04 12:05:04
 ```
 
-
 **Complex example:**
 
 ```c++
@@ -155,6 +154,7 @@ int  main() {
 ```
 
 Output:
+
 ```sh
 Before:
 2000.01.02 03:04:05
