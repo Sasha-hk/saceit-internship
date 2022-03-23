@@ -52,6 +52,7 @@
     "bitset": "cpp",
     "span": "cpp",
     "regex": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "chrono": "cpp"
   }
 }
