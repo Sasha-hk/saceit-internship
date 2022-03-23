@@ -1,19 +1,19 @@
-# Date class
+# Requirements for date
 
-Implementation: based on UNIX time.
+Implementation: ctime library.
 
 Capabilities:
 
-- create date from string, such as Date("2022.01.12")
-- create date from numbers, such as Date(2022, 1, 12)
-- append date, date.appendYear(1), the same fot others
-- set date, date.setMonth(5)
-- set weekday, setDayShift(6), setDayUnshift(0)
-- get: year, month, date, weekDay, hours...
-- set: year, month, date...
-- get UNIX time
-- overload operators such as: =, <, >, <=, >=, ==, !=...
+- constructor
+  - create current date
+  - create date from numbers
+  - create date from string
+  - create date from other date object
+- append date
+- get date
+- set date
+- overload operators
 
 Notes:
 
-> unix time started on: 1 January 1970
+> Unix time: 1 January 1970
