@@ -9,7 +9,7 @@ Date makeDate(string date) {
   return Date(date);
 }
 
-int  main() {
+int main() {
   srand(time(NULL));
 
   Date date = Date("2000.01.04 12:05:04");
@@ -17,7 +17,6 @@ int  main() {
 
   cout << date << endl;
   cout << otherDate << endl << endl;
-
 
   if (date == otherDate) {
     cout << "date == other date" << endl;
