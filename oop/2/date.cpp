@@ -2,9 +2,13 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <cmath>
 #include <vector>
 
 using namespace std;
+
+// data staff
+int daysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 // staff functions
 void tokenize(std::string const &str,
@@ -26,6 +30,10 @@ string checkZero(int num) {
     return '0' + to_string(num);
   }
   return to_string(num);
+}
+
+int mod(int div, int divider) {
+  return int(floor(div / divider));
 }
 
 // implementation of the methods
@@ -271,30 +279,76 @@ void Date::setYear(int year) {
   adjustUnixTime();
 }
 
-// ==========
+// append date
 
 void Date::appendSeconds(int seconds) {
-  TIME.tm_sec += seconds;
+  int sum = TIME.tm_sec + seconds;
+
+  if (sum > 60) {
+    appendMinutes(mod(sum, 60));
+    TIME.tm_sec += sum % 60;
+  }
+  else {
+    TIME.tm_sec = sum;
+  }
+
   adjustUnixTime();
 }
 
 void Date::appendMinutes(int minutes) {
-  TIME.tm_min += minutes;
+  int sum = TIME.tm_min + minutes;
+
+  if (sum > 60) {
+    appendHours(mod(sum, 60));
+    TIME.tm_min += sum % 60;
+  }
+  else {
+    TIME.tm_min = sum;
+  }
+
   adjustUnixTime();
 }
 
 void Date::appendHours(int hours) {
-  TIME.tm_hour += hours;
+  int sum = TIME.tm_hour + hours;
+
+  if (sum > 60) {
+    appendDate(mod(sum, 60));
+    TIME.tm_hour += sum % 60;
+  }
+  else {
+    TIME.tm_hour = sum;
+  }
+
   adjustUnixTime();
 }
 
 void Date::appendDate(int date) {
-  TIME.tm_mday += date;
+  int sum = TIME.tm_mday + date;
+  int days = daysInMonth[getMonth()];
+
+  if (sum > days) {
+    appendDate(mod(sum, days));
+    TIME.tm_mday += sum % days;
+  }
+  else {
+    TIME.tm_mday = sum;
+  }
+
   adjustUnixTime();
 }
 
 void Date::appendMonth(int month) {
-  TIME.tm_mon += month;
+  int sum = TIME.tm_mon + month;
+
+  if (sum > 11) {
+    appendYear(mod(sum, 11));
+    TIME.tm_mon += sum;
+  }
+  else {
+    TIME.tm_mon = sum;
+  }
+
   adjustUnixTime();
 }
 
