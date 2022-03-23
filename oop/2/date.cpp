@@ -36,13 +36,15 @@ int mod(int div, int divider) {
   return int(floor(div / divider));
 }
 
-// implementation of the methods
+// private
+void Date::adjustUnixTime() {
+  unixTime = mktime(&TIME);
+}
+
+// public
 Date::Date() {
   unixTime = time(NULL);
   TIME = *localtime(&unixTime);
-
-  // time_t x = mktime(TIME);
-  // cout << x << " <<< " << endl;
 }
 
 Date::Date(string datetime) {
@@ -85,7 +87,6 @@ Date::Date(string datetime) {
   TIME.tm_min = minutes;
   TIME.tm_sec = seconds;
 
-  // update unixTime according to TIME
   adjustUnixTime();
 }
 
@@ -112,63 +113,7 @@ Date::Date(
   TIME.tm_min = minutes;
   TIME.tm_sec = seconds;
 
-  // update unixTime according to TIME
   adjustUnixTime();
-}
-
-void Date::adjustUnixTime() {
-  unixTime = mktime(&TIME);
-}
-
-ostream& operator<<(ostream& out, Date& date) {
-  out << date.getString();
-  return out;
-}
-
-bool operator==(Date& first, Date& second) {
-  if (first.getUnixTime() == second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-bool operator!=(Date& first, Date& second) {
-  if (first.getUnixTime() != second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-bool operator<(Date& first, Date& second) {
-  if (first.getUnixTime() < second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-bool operator>(Date& first, Date& second) {
-  if (first.getUnixTime() > second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-bool operator<=(Date& first, Date& second) {
-  if (first.getUnixTime() <= second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-bool operator>=(Date& first, Date& second) {
-  if (first.getUnixTime() >= second.getUnixTime()) {
-    return true;
-  }
-  return false;
-}
-
-Date::~Date() {
-  // no need to free any date
 }
 
 void Date::enter() {
@@ -194,7 +139,6 @@ void Date::enter() {
   TIME.tm_min = minutes;
   TIME.tm_sec = seconds;
 
-  // update unixTime according to TIME
   unixTime = mktime(&TIME);
 }
 
@@ -279,8 +223,6 @@ void Date::setYear(int year) {
   adjustUnixTime();
 }
 
-// append date
-
 void Date::appendSeconds(int seconds) {
   int sum = TIME.tm_sec + seconds;
 
@@ -355,4 +297,55 @@ void Date::appendMonth(int month) {
 void Date::appendYear(int year) {
   TIME.tm_year += year;
   adjustUnixTime();
+}
+
+ostream& operator<<(ostream& out, Date& date) {
+  out << date.getString();
+  return out;
+}
+
+bool operator==(Date& first, Date& second) {
+  if (first.getUnixTime() == second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator!=(Date& first, Date& second) {
+  if (first.getUnixTime() != second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator<(Date& first, Date& second) {
+  if (first.getUnixTime() < second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator>(Date& first, Date& second) {
+  if (first.getUnixTime() > second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator<=(Date& first, Date& second) {
+  if (first.getUnixTime() <= second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+bool operator>=(Date& first, Date& second) {
+  if (first.getUnixTime() >= second.getUnixTime()) {
+    return true;
+  }
+  return false;
+}
+
+Date::~Date() {
+  // no need to free any date
 }

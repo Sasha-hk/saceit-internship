@@ -7,7 +7,7 @@
 using std::string;
 
 /*
- * Date object
+ * Date time
  */
 class Date {
   private:
