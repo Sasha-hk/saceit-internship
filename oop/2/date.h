@@ -162,6 +162,42 @@ class Date {
     void setYear(int year);
 
     /**
+     * Append seconds
+     * @param seconds Seconds to append
+     */
+    void appendSeconds(int seconds);
+
+    /**
+     * Append minutes
+     * @param minutes Minutes to append
+     */
+    void appendMinutes(int minutes);
+
+    /**
+     * Append hours
+     * @param hours Hours to append
+     */
+    void appendHours(int hours);
+
+    /**
+     * Append date
+     * @param date Date to append
+     */
+    void appendDate(int date);
+
+    /**
+     * Append month
+     * @param month Month to append
+     */
+    void appendMonth(int month);
+
+    /**
+     * Append year
+     * @param year Year to append
+     */
+    void appendYear(int year);
+
+    /**
      * Overload << operator
      */
     friend std::ostream& operator<<(std::ostream& out, const Date& date);

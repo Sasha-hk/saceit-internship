@@ -12,11 +12,11 @@ using namespace std;
 int  main() {
   srand(time(NULL));
 
-  // Date date = Date("2000.01.04 12:13:04");
-  // Date otherDate = Date("2000.01.04 12:13:04");
+  Date date = Date("2000.01.04 12:05:04");
+  Date otherDate = Date("2000.01.04 12:05:04");
 
-  Date date = Date();
-  Date otherDate = Date();
+  // Date date = Date();
+  // Date otherDate = Date();
 
   cout << date << endl;
   cout << otherDate << endl << endl;
@@ -31,7 +31,9 @@ int  main() {
 
   cout << endl;
 
-  date.setMinutes(19);
+  date.setMinutes(59);
+
+  otherDate.appendMinutes(5);
 
   cout << date << endl;
   cout << otherDate << endl << endl;

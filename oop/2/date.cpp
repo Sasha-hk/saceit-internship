@@ -270,3 +270,35 @@ void Date::setYear(int year) {
   TIME.tm_year = year;
   adjustUnixTime();
 }
+
+// ==========
+
+void Date::appendSeconds(int seconds) {
+  TIME.tm_sec += seconds;
+  adjustUnixTime();
+}
+
+void Date::appendMinutes(int minutes) {
+  TIME.tm_min += minutes;
+  adjustUnixTime();
+}
+
+void Date::appendHours(int hours) {
+  TIME.tm_hour += hours;
+  adjustUnixTime();
+}
+
+void Date::appendDate(int date) {
+  TIME.tm_mday += date;
+  adjustUnixTime();
+}
+
+void Date::appendMonth(int month) {
+  TIME.tm_mon += month;
+  adjustUnixTime();
+}
+
+void Date::appendYear(int year) {
+  TIME.tm_year += year;
+  adjustUnixTime();
+}
