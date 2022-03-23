@@ -106,7 +106,7 @@ Date::Date(
   time_t current_time = time(NULL);
   TIME = *localtime(&current_time);
 
-  TIME.tm_year = year;
+  TIME.tm_year = year - 1900;
   TIME.tm_mon = month;
   TIME.tm_mday = date;
   TIME.tm_hour = hours;
@@ -219,7 +219,7 @@ void Date::setMonth(int month) {
 }
 
 void Date::setYear(int year) {
-  TIME.tm_year = year;
+  TIME.tm_year = year - 1900;
   adjustUnixTime();
 }
 
