@@ -1,4 +1,4 @@
-# Practice
+# 📋 Internship
 
 Internship at [SACEIT](https://saceit.org.ua/) college in 2022.
 
