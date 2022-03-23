@@ -11,7 +11,6 @@ Table of contents:
 - [programming](./programming/)
 - [OOP](./oop/)
 
-
 **Notes:**
 
 - [Run command from Pascal](https://wiki.freepascal.org/Console_Mode_Pascal)
