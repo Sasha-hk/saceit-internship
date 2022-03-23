@@ -132,7 +132,7 @@ void Date::enter() {
   cout << "Enter seconds:";
   cin >> seconds;
 
-  TIME.tm_year = year;
+  TIME.tm_year = year - 1900;
   TIME.tm_mon = month;
   TIME.tm_mday = date;
   TIME.tm_hour = hours;
