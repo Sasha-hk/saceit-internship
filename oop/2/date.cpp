@@ -78,7 +78,7 @@ Date::Date(string datetime) {
   TIME.tm_sec = seconds;
 
   // update unixTime according to TIME
-  unixTime = mktime(&TIME);
+  adjustUnixTime();
 }
 
 Date::Date(Date *datePtr) {
@@ -105,6 +105,10 @@ Date::Date(
   TIME.tm_sec = seconds;
 
   // update unixTime according to TIME
+  adjustUnixTime();
+}
+
+void Date::adjustUnixTime() {
   unixTime = mktime(&TIME);
 }
 
@@ -235,4 +239,34 @@ long Date::getUnixTime() {
 
 tm Date::getTime() {
   return TIME;
+}
+
+void Date::setSeconds(int seconds) {
+  TIME.tm_sec = seconds;
+  adjustUnixTime();
+}
+
+void Date::setMinutes(int minutes) {
+  TIME.tm_min = minutes;
+  adjustUnixTime();
+}
+
+void Date::setHours(int hours) {
+  TIME.tm_hour = hours;
+  adjustUnixTime();
+}
+
+void Date::setDate(int date) {
+  TIME.tm_mday = date;
+  adjustUnixTime();
+}
+
+void Date::setMonth(int month) {
+  TIME.tm_mon = month;
+  adjustUnixTime();
+}
+
+void Date::setYear(int year) {
+  TIME.tm_year = year;
+  adjustUnixTime();
 }

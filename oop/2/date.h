@@ -11,6 +11,8 @@ using std::string;
  */
 class Date {
   private:
+    void adjustUnixTime();
+
   protected:
     time_t unixTime;
     struct tm TIME;
@@ -122,6 +124,42 @@ class Date {
      * @return time object
      */
     tm getTime();
+
+    /**
+     * Set seconds
+     * @param seconds Count of seconds to set
+     */
+    void setSeconds(int seconds);
+
+    /**
+     * Set minutes
+     * @param minutes Count of minutes to set
+     */
+    void setMinutes(int minutes);
+
+    /**
+     * Set hours
+     * @param hours Count of hours to set
+     */
+    void setHours(int hours);
+
+    /**
+     * Set date
+     * @param date Date to set
+     */
+    void setDate(int date);
+
+    /**
+     * Set month
+     * @param date Date to set
+     */
+    void setMonth(int month);
+
+    /**
+     * Set year
+     * @param year Year to set
+     */
+    void setYear(int year);
 
     /**
      * Overload << operator
