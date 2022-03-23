@@ -143,13 +143,7 @@ void Date::enter() {
 }
 
 void Date::display() {
-  cout
-    << checkZero(getYear()) << "."
-    << checkZero(getMonth()) << "."
-    << checkZero(getDate()) << " "
-    << checkZero(getHours()) << ":"
-    << checkZero(getMinutes()) << ":"
-    << checkZero(getSeconds()) << endl;
+  cout << getString() << endl;
 }
 
 string Date::getString() {
