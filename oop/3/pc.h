@@ -47,8 +47,8 @@ class PC {
   private:
   protected:
     HDD storage;
-    string* model;
-    int price;
+    string model;
+    string price;
 
   public:
     /**
@@ -64,9 +64,15 @@ class PC {
      */
     PC(
       HDD storage,
-      string* model,
-      int price
+      string model,
+      string price
     );
+
+    /**
+     * Get storage
+     * @return Storage
+     */
+    HDD getStorage();
 
     /**
      * PC destructor
@@ -92,8 +98,8 @@ class PCExtended : public PC {
      */
     PCExtended(
       HDD storage,
-      string* model,
-      int price,
+      string model,
+      string price,
       float screenDiagonal
     );
 

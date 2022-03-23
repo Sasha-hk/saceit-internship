@@ -3,6 +3,8 @@
 
 using namespace std;
 
+HDD::HDD() {}
+
 HDD::HDD(int Mb):Mb(Mb) {}
 
 int HDD::getSize() {
@@ -15,27 +17,28 @@ HDD::~HDD() {
 
 PC::PC(
   HDD storage,
-  string* model,
-  int price
+  string model,
+  string price
 ) {
   this->storage = storage;
   this->model = model;
   this->price = price;
 }
 
+HDD PC::getStorage() {
+  return storage;
+}
+
 PC::~PC() {
-  delete model;
+  // no need to free any date
 }
 
 PCExtended::PCExtended(
   HDD storage,
-  string* model,
-  int price,
+  string model,
+  string price,
   float screenDiagonal
-) {
-  this->storage = storage;
-  this->model = model;
-  this->price = price;
+):PC(storage, model, price) {
   this->screenDiagonal = screenDiagonal;
 }
 
