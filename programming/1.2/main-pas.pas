@@ -1,7 +1,7 @@
 program HelloWorld;
-uses 
+uses
   Classes, Unix;
-var 
+var
   S: LongInt;
 begin
   S := fpsystem('./main');
