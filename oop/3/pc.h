@@ -1,6 +1,6 @@
 #pragma once
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef PD_H
+#define PC_H
 
 #include <string>
 
@@ -16,8 +16,13 @@ class HDD {
 
   public:
     /**
+     * Default DHH constructor
+     */
+    HDD();
+
+    /**
      * HDD costructor
-     * @param Md Count of megabytes
+     * @param Mb Count of megabytes
      */
     HDD(
       int Mb
@@ -35,6 +40,9 @@ class HDD {
     ~HDD();
 };
 
+/**
+ * PC class
+ */
 class PC {
   private:
   protected:
@@ -43,6 +51,11 @@ class PC {
     int price;
 
   public:
+    /**
+     * Default constructor
+     */
+    PC();
+
     /**
      * PC costructor
      * @param storage HDD instance
@@ -61,6 +74,9 @@ class PC {
     ~PC();
 };
 
+/**
+ * Extended PC class
+ */
 class PCExtended : public PC {
   private:
   protected:
@@ -92,6 +108,5 @@ class PCExtended : public PC {
      */
     ~PCExtended();
 };
-
 
 #endif
