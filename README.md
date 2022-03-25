@@ -6,7 +6,7 @@ Internship at [SACEIT](https://saceit.org.ua/) college in 2022.
 
 - [Date class](oop/2/main.cpp)
 
-Table of contents:
+Parts ot the internship:
 
 - [programming](./programming/)
 - [OOP](./oop/)
