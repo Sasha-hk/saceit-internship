@@ -48,44 +48,55 @@ Date::Date() {
 }
 
 Date::Date(string datetime) {
-  string datePart = datetime.substr(0, datetime.find(' '));
-  string timePart = datetime.substr(datetime.find(' ') + 1, -1);
-  int parseDateIndex = 0;
-  int year = 1970;
-  int month = 0;
-  int date = 1;
-
-  int parseTimeIndex = 0;
-  int hours = 0;
-  int minutes = 0;
-  int seconds = 0;
-
-  // parse date part
-  std::vector<std::string> dateOptions;
-  tokenize(datePart, '.', dateOptions);
-
-  year = stoi(dateOptions[0]) - 1900;
-  month = stoi(dateOptions[1]);
-  date = stoi(dateOptions[2]);
-
-  // parse time part
-  std::vector<std::string> timeOptions;
-  tokenize(timePart, ':', timeOptions);
-
-  hours = stoi(timeOptions[0]);
-  minutes = stoi(timeOptions[1]);
-  seconds = stoi(timeOptions[2]);
-
   // initialize time
   unixTime = time(NULL);
   TIME = *localtime(&unixTime);
+  if (datetime.find('.') < datetime.length()) {
+    string datePart = datetime.substr(0, datetime.find(' '));
 
-  TIME.tm_year = year;
-  TIME.tm_mon = month;
-  TIME.tm_mday = date;
-  TIME.tm_hour = hours;
-  TIME.tm_min = minutes;
-  TIME.tm_sec = seconds;
+    int parseDateIndex = 0;
+    int year = 1970;
+    int month = 0;
+    int date = 1;
+
+    // parse date part
+    std::vector<std::string> dateOptions;
+    tokenize(datePart, '.', dateOptions);
+
+    year = stoi(dateOptions[0]) - 1900;
+    month = stoi(dateOptions[1]);
+    date = stoi(dateOptions[2]);
+
+    TIME.tm_year = year;
+    TIME.tm_mon = month;
+    TIME.tm_mday = date;
+  } else {
+    throw invalid_argument( "Required year.month.date properties" );
+  }
+
+  if (datetime.find(' ') < datetime.length() ) {
+    string timePart = datetime.substr(datetime.find(' ') + 1, -1);
+    int parseTimeIndex = 0;
+    int hours = 0;
+    int minutes = 0;
+    int seconds = 0;
+
+    // parse time part
+    std::vector<std::string> timeOptions;
+    tokenize(timePart, ':', timeOptions);
+
+    hours = stoi(timeOptions[0]);
+    minutes = stoi(timeOptions[1]);
+    seconds = stoi(timeOptions[2]);
+
+    TIME.tm_hour = hours;
+    TIME.tm_min = minutes;
+    TIME.tm_sec = seconds;
+  } else {
+    TIME.tm_hour = 1;
+    TIME.tm_min = 0;
+    TIME.tm_sec = 0;
+  }
 
   adjustUnixTime();
 }
@@ -109,7 +120,7 @@ Date::Date(
   TIME.tm_year = year - 1900;
   TIME.tm_mon = month;
   TIME.tm_mday = date;
-  TIME.tm_hour = hours;
+  TIME.tm_hour = hours + 1;
   TIME.tm_min = minutes;
   TIME.tm_sec = seconds;
 
