@@ -7,7 +7,7 @@ Table of contents:
 **Usage:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
@@ -32,7 +32,7 @@ Output:
 **Complex example:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
@@ -109,7 +109,7 @@ date == other date
 **Constructors:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
@@ -132,7 +132,7 @@ int  main() {
 **Append date time:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
@@ -166,7 +166,7 @@ After:
 **Set date time:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
@@ -199,7 +199,7 @@ Output:
 **Get date time:**
 
 ```c++
-#include "date.cpp"
+#include "date.h"
 #include <iostream>
 
 using namespace std;
