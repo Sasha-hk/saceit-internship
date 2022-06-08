@@ -3,10 +3,9 @@
 #include <string>
 #include <jsoncpp/json/json.h>
 #include <jsoncpp/json/value.h>
- 
+
 using namespace std;
 using namespace Json;
-
 
 const string filename = "db.json";
 
@@ -15,18 +14,18 @@ Json::Value readAndParseDB(string filename) {
   Json::Value parsed;
   Json::Reader reader;
 
-  reader.parse(db, parsed);  
+  reader.parse(db, parsed);
 
   return parsed;
 }
 
 void showInterface() {
   cout << endl << "Select action:" << endl;
-  cout 
-    << "  a - add item" 
-    << endl << "  d - delete" 
-    << endl << "  f - find" 
-    << endl << "  s - show" 
+  cout
+    << "  a - add item"
+    << endl << "  d - delete"
+    << endl << "  f - find"
+    << endl << "  s - show"
     << endl << "  x - exit"
     << endl << "  u - update"
     << endl;
@@ -48,14 +47,14 @@ void updateJson(Json::Value data) {
   Json::StreamWriterBuilder builder;
   std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
   std::ofstream outputFileStream(filename);
-  writer -> write(data, &outputFileStream);  
+  writer -> write(data, &outputFileStream);
 }
 
 void createRecord(Json::Value parsed) {
   Json::Value newRecord;
 
   string strID = getInput("Enter store unique id: ");
-  int id; 
+  int id;
 
   stringstream geek(strID);
   geek >> id;
@@ -85,7 +84,7 @@ void deleteByCode(Json::Value parsed) {
     }
   }
 
-  updateJson(updatedData);  
+  updateJson(updatedData);
 }
 
 void findByCode(Json::Value data) {
@@ -116,7 +115,7 @@ void updateByID(Json::Value data) {
 
       updateRecord["number"] = getInput(" > Enter number of the products: ");
 
-      updateRecord["price"] = getInput(" > Enter price: ");  
+      updateRecord["price"] = getInput(" > Enter price: ");
 
       data[i] = updateRecord;
 
@@ -124,7 +123,7 @@ void updateByID(Json::Value data) {
 
       break;
     }
-  }  
+  }
 }
 
 void handleOption(string option, Json::Value data) {
